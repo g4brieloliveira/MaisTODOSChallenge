@@ -1,31 +1,23 @@
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
-import { Button } from "react-native-paper";
+import { Image, Text, View } from "react-native";
 
 import MaisTODOSLogo from "../../../assets/MaisTODOSLogo.png";
 
+import { Container, Title, LoginButton } from './styles'
+
 export function SplashScreen() {
   return (
-    <View style={styles.container}>
-      <Text>MaisTODOS Banking</Text>
+    <Container>
+      <Title>MaisTODOS Banking</Title>
       <Image source={MaisTODOSLogo} />
-      <Button
+      <LoginButton
         icon="account"
         mode="contained"
-        style={{ backgroundColor: "#94D60B" }}
+        accessibilityLabel="Acessar minha conta"
         onPress={() => console.log("Pressed")}
       >
         Acessar minha conta
-      </Button>
-    </View>
+      </LoginButton>
+    </Container>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#00A884",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
