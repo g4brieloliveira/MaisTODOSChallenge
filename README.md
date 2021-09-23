@@ -1,0 +1,2 @@
+- Styled Components
+- React Native Paper 
