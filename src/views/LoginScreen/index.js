@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { View } from "react-native";
+import React, { useEffect, useState } from "react";
 import { TextInput } from "react-native-paper";
 import {
   Container,
@@ -11,10 +10,34 @@ import {
   LoginButton,
 } from "./styles";
 import { colors } from "../../utils/colors";
+import { api } from "../../service/api";
 
 export function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPasword] = useState("");
+  const [isLogged, setIsLogged] = useState(false);
+  const [error, setError] = useState(false);
+
+  const user = {
+    username,
+    password,
+  };
+
+  function handleLogin() {
+    if (username.length > 0 && password.length > 0) {
+      api
+        .post("/login", { user })
+        .then((response) => setIsLogged(true))
+        .catch((err) => {
+          console.error("ops! ocorreu um erro" + err);
+        });
+
+      console.log(isLogged);
+      navigation.navigate("MainScreen");
+    } else {
+      setError(true)
+    }
+  }
 
   return (
     <Container>
@@ -30,7 +53,7 @@ export function LoginScreen({ navigation }) {
         </MainContentView>
         <InputView>
           <TextInput
-            label="Username"
+            label={error ? "Username (obrigatório)" : "Username"}
             mode="outlined"
             outlineColor={colors.primary}
             left={<TextInput.Icon name="account" />}
@@ -39,8 +62,9 @@ export function LoginScreen({ navigation }) {
           />
 
           <TextInput
-            label="Senha"
+            label={error ? "Senha (obrigatório)" : "Senha"}
             mode="outlined"
+            secureTextEntry
             outlineColor={colors.primary}
             left={<TextInput.Icon name="lock" />}
             value={password}
@@ -52,7 +76,7 @@ export function LoginScreen({ navigation }) {
         icon="account"
         mode="contained"
         accessibilityLabel="Entrar"
-        onPress={() => navigation.navigate("LoginScreen")}
+        onPress={() => handleLogin()}
       >
         Entrar
       </LoginButton>
