@@ -19,7 +19,7 @@ import {
 
 export function MainScreen() {
   const [transactions, setTransactions] = useState([]);
-  const [isBlurred, setIsBlurred] = useState(false);
+  const [isBlurred, setIsBlurred] = useState(true);
 
   useEffect(() => {
     api
