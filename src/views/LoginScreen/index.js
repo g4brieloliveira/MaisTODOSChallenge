@@ -31,8 +31,6 @@ export function LoginScreen({ navigation }) {
         .catch((err) => {
           console.error("ops! ocorreu um erro" + err);
         });
-
-      console.log(isLogged);
       navigation.navigate("MainScreen");
     } else {
       setError(true)
