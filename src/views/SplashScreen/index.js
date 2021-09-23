@@ -5,7 +5,7 @@ import MaisTODOSLogo from "../../../assets/MaisTODOSLogo.png";
 
 import { Container, Title, LoginButton } from './styles'
 
-export function SplashScreen() {
+export function SplashScreen({ navigation }) {
   return (
     <Container>
       <Title>MaisTODOS Banking</Title>
@@ -14,7 +14,7 @@ export function SplashScreen() {
         icon="account"
         mode="contained"
         accessibilityLabel="Acessar minha conta"
-        onPress={() => console.log("Pressed")}
+        onPress={() => navigation.navigate("LoginScreen")}
       >
         Acessar minha conta
       </LoginButton>
