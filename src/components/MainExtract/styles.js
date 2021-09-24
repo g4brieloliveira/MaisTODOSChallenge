@@ -28,4 +28,6 @@ export const MenuItem= styled(Chip).attrs({
 export const Transactions = styled.View`
   width: 100%;
   height: 78%;
+  align-items: center;
+  justify-content: center;
 `;

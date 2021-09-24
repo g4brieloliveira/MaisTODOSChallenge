@@ -1,5 +1,5 @@
 import React from "react";
-import { IconButton } from 'react-native-paper';
+import { IconButton } from "react-native-paper";
 
 import {
   Container,
@@ -13,9 +13,9 @@ import {
 } from "./styles";
 
 const ICONS = {
-  recarga: 'cellphone',
-  pagamento: 'cash-multiple'
-}
+  recarga: "cellphone",
+  pagamento: "cash-multiple",
+};
 
 export function TransactionItem({ transaction }) {
   function addZeroToFormat(number) {
@@ -28,15 +28,18 @@ export function TransactionItem({ transaction }) {
     "/" +
     addZeroToFormat(date.getMonth() + 1).toString();
 
-
   return (
     <Container>
       <ImageContent>
         <IconButton
-          icon={transaction.tipoTransacao === "Pagamento" ? ICONS.pagamento : ICONS.recarga}
+          icon={
+            transaction.tipoTransacao === "Pagamento"
+              ? ICONS.pagamento
+              : ICONS.recarga
+          }
           size={20}
           disabled
-          onPress={() => console.log('Pressed')}
+          onPress={() => console.log("Pressed")}
         />
       </ImageContent>
       <TextContent>
@@ -48,7 +51,7 @@ export function TransactionItem({ transaction }) {
       </TextContent>
       <ValueContent>
         <TransactionValue>
-          {transaction.tipoTransacao === "Pagamento" ? "-" : null} R${" "}
+          {transaction.tipoTransacao === "Pagamento" ? "-" : "+"} R$
           {transaction.valorTransacao},00
         </TransactionValue>
         <TransactionDate>{newDate}</TransactionDate>

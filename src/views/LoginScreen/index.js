@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { api } from "../../service/api";
+
 import { TextInput } from "react-native-paper";
+import { colors } from "../../utils/colors";
+
 import {
   Container,
   ContentView,
@@ -9,8 +13,6 @@ import {
   InputView,
   LoginButton,
 } from "./styles";
-import { colors } from "../../utils/colors";
-import { api } from "../../service/api";
 
 export function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
@@ -28,15 +30,13 @@ export function LoginScreen({ navigation }) {
     password,
   };
 
-  console.log(user)
-
   function handleLogin() {
     if (username.length > 0 && password.length > 0) {
       api
         .post("/login", { user })
         .then((response) => setIsLogged(true))
         .catch((err) => {
-          console.error("ops! ocorreu um erro" + err);
+          console.error(err);
         });
       navigation.navigate("MainScreen");
     } else {

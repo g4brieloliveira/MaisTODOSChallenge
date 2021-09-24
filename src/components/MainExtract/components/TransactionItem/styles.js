@@ -14,11 +14,11 @@ export const Container = styled.View`
 `;
 
 export const ImageContent = styled.View`
-  width: 20%;
+  width: 15%;
 `;
 
 export const TextContent = styled.View`
-  width: 60%;
+  width: 65%;
 `;
 
 export const TransactionType = styled.Text`

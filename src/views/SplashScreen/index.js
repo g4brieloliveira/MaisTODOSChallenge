@@ -4,12 +4,12 @@ import { Image, Text, View } from "react-native";
 
 import MaisTODOSLogo from "../../../assets/MaisTODOSLogo.png";
 
-import { Container, Title, LoginButton } from './styles'
+import { Container, Title, LoginButton } from "./styles";
 
 export function SplashScreen({ navigation }) {
   return (
     <Container>
-      <StatusBar style="auto"/>
+      <StatusBar style="auto" />
       <Title>MaisTODOS Banking</Title>
       <Image source={MaisTODOSLogo} />
       <LoginButton

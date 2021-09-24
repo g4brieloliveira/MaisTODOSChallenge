@@ -29,7 +29,7 @@ export function MainBalance() {
         {isBlurred ? (
           <BalanceTotal>R$ ----- </BalanceTotal>
         ) : (
-          <BalanceTotal>R$ { balance.saldo },00</BalanceTotal>
+          <BalanceTotal>R$ {balance.saldo},00</BalanceTotal>
         )}
         <ViewBalanceIcon
           icon="eye"

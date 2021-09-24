@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { FlatList } from "react-native";
 import { api } from "../../service/api";
+
+import { FlatList } from "react-native";
+import { ActivityIndicator } from "react-native-paper";
 import { TransactionItem } from "./components/TransactionItem";
+import { colors } from "../../utils/colors";
 
 import { Extract, ExtractMenu, MenuItem, Transactions } from "./styles";
 
 export function MainExtract() {
   const [transactions, setTransactions] = useState([]);
   const [filteredTransactions, setFilteredTransactions] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [filter, setFilter] = useState("all");
 
   async function getDataFromAPI() {
-    api
+    setIsLoading(true);
+    await api
       .get("/transactions")
-      .then((response) => setTransactions(response.data))
+      .then((response) => {
+        setTransactions(response.data);
+        setIsLoading(false);
+      })
       .catch((err) => console.error(err));
   }
 
@@ -48,6 +56,7 @@ export function MainExtract() {
 
   useEffect(() => {
     getDataFromAPI();
+    filterTransactions();
   }, []);
 
   const renderItem = ({ item }) => <TransactionItem transaction={item} />;
@@ -79,11 +88,23 @@ export function MainExtract() {
       </ExtractMenu>
 
       <Transactions>
-        <FlatList
-          data={filteredTransactions}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id + Math.random()}
-        />
+        {isLoading ? (
+          <ActivityIndicator
+            size="large"
+            animating={true}
+            color={colors.secondary}
+          />
+        ) : (
+          <FlatList
+            data={
+              filteredTransactions.length > 0
+                ? filteredTransactions
+                : transactions
+            }
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id + Math.random()}
+          />
+        )}
       </Transactions>
     </Extract>
   );
