@@ -18,10 +18,17 @@ export function LoginScreen({ navigation }) {
   const [isLogged, setIsLogged] = useState(false);
   const [error, setError] = useState(false);
 
+  function formatCPF(cpf) {
+    cpf = cpf.replace(/[^\d]/g, "");
+    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+  }
+
   const user = {
     username,
     password,
   };
+
+  console.log(user)
 
   function handleLogin() {
     if (username.length > 0 && password.length > 0) {
@@ -33,7 +40,7 @@ export function LoginScreen({ navigation }) {
         });
       navigation.navigate("MainScreen");
     } else {
-      setError(true)
+      setError(true);
     }
   }
 
@@ -53,9 +60,10 @@ export function LoginScreen({ navigation }) {
           <TextInput
             label={error ? "Username (obrigatório)" : "Username"}
             mode="outlined"
+            keyboardType="number-pad"
             outlineColor={colors.primary}
             left={<TextInput.Icon name="account" />}
-            value={username}
+            value={formatCPF(username)}
             onChangeText={(text) => setUsername(text)}
           />
 

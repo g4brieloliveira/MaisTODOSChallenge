@@ -1,3 +1,4 @@
 - Styled Components
 - React Native Paper 
 - React Navigation
+- Axios
